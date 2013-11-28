@@ -67,13 +67,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CommandAnalyser.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="InputCallback.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MoveCallback.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommandAnalyser.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="InputCallback.h" />
+    <ClInclude Include="MoveCallback.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\rooms.json" />

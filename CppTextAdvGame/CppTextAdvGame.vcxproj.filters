@@ -24,12 +24,30 @@
     <ClCompile Include="Console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CommandAnalyser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputCallback.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveCallback.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandAnalyser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputCallback.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCallback.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -44,12 +44,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\James\visual_studio_projects\CppTextAdvGame\CppTextAdvGame\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\User\privateWork\visual_studio\CppTextAdvGameMkII\CppTextAdvGame;C:\Users\User\privateWork\visual_studio\CppTextAdvGameMkII\CppTextAdvGame\Artemis;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\James\visual_studio_projects\CppTextAdvGame\CppTextAdvGame\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>lib/ArtemisCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\User\privateWork\visual_studio\CppTextAdvGameMkII\CppTextAdvGame;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ArtemisCpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -70,19 +70,28 @@
     <ClCompile Include="CommandAnalyser.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameCallback.cpp" />
     <ClCompile Include="InputCallback.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MoveCallback.cpp" />
+    <ClCompile Include="MovementSystem.cpp" />
+    <ClCompile Include="PositionComponent.cpp" />
+    <ClCompile Include="VelocityComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandAnalyser.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameCallback.h" />
     <ClInclude Include="InputCallback.h" />
-    <ClInclude Include="MoveCallback.h" />
+    <ClInclude Include="MovementSystem.h" />
+    <ClInclude Include="PositionComponent.h" />
+    <ClInclude Include="VelocityComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\rooms.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="ArtemisCpp.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

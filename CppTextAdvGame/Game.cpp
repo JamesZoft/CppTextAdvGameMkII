@@ -1,9 +1,15 @@
 #include "Game.h"
 #include <string>
 #include <iostream>
-#include "Console.h">
-
-
+#include "Console.h"
+#include "GameCallback.h"
+#include "CommandAnalyser.h"
+#pragma comment(lib, "ArtemisCpp.lib")
+#include "Artemis\World.h"
+#include "MovementSystem.h"
+#include "Artemis\SystemManager.h"
+#include "Artemis\Entity.h"
+#include <windows.h>
 
 Game::Game()
 {
@@ -19,11 +25,30 @@ void Game::play()
 	Console::write("and kill him. He has many monsters guarding his maze, but there are also magical treasures, lost in the ages awaiting your discovery!\n");
 	Console::write(std::string("Good luck, ") + name + std::string("!"));
 	bool playing = true;
+	CommandAnalyser *analyser = new CommandAnalyser;
+	artemis::World world;
+	artemis::SystemManager * sm = world.getSystemManager();
+	MovementSystem *movementSys = (MovementSystem*)sm->setSystem(new MovementSystem());
+	artemis::EntityManager * em = world.getEntityManager();
+	
+	sm->initializeAll();
+
+	artemis::Entity &player = em->create();
+	player.addComponent(new VelocityComponent(2, 4));
+	player.addComponent(new PositionComponent(0, 0));
+	player.refresh();
+
+	PositionComponent * comp = (PositionComponent*)player.getComponent<PositionComponent>();
 	while (playing)
 	{
+		world.loopStart();
+		world.setDelta(1.0f);
+		movementSys->process();
 		std::string input;
 		cin >> input;
-		playing = CommandAnalyser::analyse
+		GameCallback *callback = new GameCallback;
+		playing = analyser->analyse(input, callback);
+        Sleep(160);
 	}
 }
 

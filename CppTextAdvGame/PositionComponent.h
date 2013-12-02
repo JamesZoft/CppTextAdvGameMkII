@@ -1,17 +1,15 @@
 #pragma once
-#pragma comment(lib, "ArtemisCpp.lib")
 #include "Artemis\Component.h"
+#include "Room.h"
 
 class PositionComponent : public artemis::Component
 {
 
 	public:
-		float posX;
-		float posY;
-		PositionComponent(float posX, float posY)
+		Room currRoom;
+		PositionComponent(Room currRoom)
 		{
-			this->posX = posX;
-			this->posY = posY;
+			this->currRoom = currRoom;
 		};
 };
 

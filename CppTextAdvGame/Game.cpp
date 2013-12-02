@@ -4,7 +4,6 @@
 #include "Console.h"
 #include "GameCallback.h"
 #include "CommandAnalyser.h"
-#pragma comment(lib, "ArtemisCpp.lib")
 #include "Artemis\World.h"
 #include "MovementSystem.h"
 #include "Artemis\SystemManager.h"
@@ -34,15 +33,12 @@ void Game::play()
 	sm->initializeAll();
 
 	artemis::Entity &player = em->create();
-	player.addComponent(new VelocityComponent(2, 4));
-	player.addComponent(new PositionComponent(0, 0));
 	player.refresh();
 
 	PositionComponent * comp = (PositionComponent*)player.getComponent<PositionComponent>();
 	while (playing)
 	{
 		world.loopStart();
-		world.setDelta(1.0f);
 		movementSys->process();
 		std::string input;
 		cin >> input;

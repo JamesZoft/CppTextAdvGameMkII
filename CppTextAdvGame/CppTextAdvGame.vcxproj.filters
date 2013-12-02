@@ -36,10 +36,13 @@
     <ClCompile Include="MovementSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VelocityComponent.cpp">
+    <ClCompile Include="PositionComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PositionComponent.cpp">
+    <ClCompile Include="Room.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomMovementComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,10 +65,13 @@
     <ClInclude Include="MovementSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VelocityComponent.h">
+    <ClInclude Include="PositionComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PositionComponent.h">
+    <ClInclude Include="Room.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomMovementComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

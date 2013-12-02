@@ -16,6 +16,7 @@ bool CommandAnalyser::analyse(std::string command, InputCallback *callback)
 	{
 
 	}
+	return true;
 }
 
 CommandAnalyser::~CommandAnalyser()

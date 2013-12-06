@@ -73,7 +73,6 @@
     <ClCompile Include="GameCallback.cpp" />
     <ClCompile Include="InputCallback.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="RoomMovementComponent.cpp" />
     <ClCompile Include="MovementSystem.cpp" />
     <ClCompile Include="PositionComponent.cpp" />
     <ClCompile Include="Room.cpp" />
@@ -84,7 +83,6 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCallback.h" />
     <ClInclude Include="InputCallback.h" />
-    <ClInclude Include="RoomMovementComponent.h" />
     <ClInclude Include="MovementSystem.h" />
     <ClInclude Include="PositionComponent.h" />
     <ClInclude Include="Room.h" />

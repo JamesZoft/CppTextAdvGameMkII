@@ -16,6 +16,10 @@ bool CommandAnalyser::analyse(std::string command, InputCallback *callback)
 	{
 
 	}
+	if (command == "move")
+	{
+
+	}
 	return true;
 }
 

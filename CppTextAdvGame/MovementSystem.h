@@ -7,14 +7,15 @@
 class MovementSystem : public artemis::EntityProcessingSystem
 {
 	private:
-		artemis::ComponentMapper<PositionComponent> positionMapper;
+		artemis::ComponentMapper<PositionComponent> currPosMapper;
+		artemis::ComponentMapper<PositionComponent> nextPosMapper;
+		bool moveEntity(artemis::Entity &e, PositionComponent &currPos, PositionComponent &nextPos);
 	public:
-		MovementSystem() {
-			addComponentType<PositionComponent>();
-		};
+		MovementSystem();
 
 		virtual void initialize() {
-			positionMapper.init(*world);
+			currPosMapper.init(*world);
+			nextPosMapper.init(*world);
 		};
 
 		void processEntity(artemis::Entity &e);

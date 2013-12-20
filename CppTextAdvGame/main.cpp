@@ -6,13 +6,6 @@
 #include "boost/graph/adjacency_list.hpp"
 #include "boost/graph/depth_first_search.hpp"
 
-using namespace boost;
-
-typedef adjacency_list<vecS, vecS, undirectedS> MyGraph;
-typedef boost::graph_traits<MyGraph>::vertex_descriptor MyVertex;
-
-using namespace std;
-
 typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS> MyGraph;
 typedef boost::graph_traits<MyGraph>::vertex_descriptor MyVertex;
 
@@ -21,7 +14,7 @@ class MyVisitor : public boost::default_dfs_visitor
 public:
 	void discover_vertex(MyVertex v, const MyGraph& g) const
 	{
-		cerr << v << endl;
+		std::cerr << v << std::endl;
 		return;
 	}
 };
@@ -33,10 +26,16 @@ int main()
 	boost::add_edge(0, 2, g);
 	boost::add_edge(1, 2, g);
 	boost::add_edge(1, 3, g);
-
 	MyVisitor vis;
-	boost::depth_first_search(g, boost::visitor(vis));
-
+	MyGraph::adjacency_iterator neighbourIt, neighbourEnd;
+	boost::tie(neighbourIt, neighbourEnd) = boost::adjacent_vertices(1, g);
+	for (; neighbourIt != neighbourEnd; ++neighbourIt){
+		auto vertexID = *neighbourIt; // dereference vertexIt, get the ID
+		MyVertex & vertex = g[vertexID];
+		std::cout << vertexID << std::endl;
+	}
+	std::string s;
+	std::cin >> s;
 	return 0;
 }
 /*

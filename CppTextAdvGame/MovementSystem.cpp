@@ -42,9 +42,10 @@ void MovementSystem::processEntity(artemis::Entity &e)
 
 bool MovementSystem::moveEntity(artemis::Entity &e, PositionComponent &currPos, PositionComponent &nextPos)
 {
-	if (roomGraph.pointsAreDirectlyConnected(currPos, nextPos))
-	{
-		e.removeComponent<PositionComponent>();
-		e.addComponent(&nextPos);
-	}
+	//if (roomGraph.pointsAreDirectlyConnected(currPos, nextPos))
+	//{
+	//	e.removeComponent<PositionComponent>();
+	//	e.addComponent(&nextPos);
+	//}
+	return false;
 }

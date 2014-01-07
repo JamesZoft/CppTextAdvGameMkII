@@ -5,9 +5,16 @@
 #include "boost/graph/graph_traits.hpp"
 #include "boost/graph/adjacency_list.hpp"
 #include "boost/graph/depth_first_search.hpp"
+#include "boost/graph/astar_search.hpp"
+#include "Room.h"
+#include <vector>
 
-typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS> MyGraph;
+struct Edge {};
+typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, Room, Edge> MyGraph;
 typedef boost::graph_traits<MyGraph>::vertex_descriptor MyVertex;
+
+typedef MyGraph::vertex_descriptor VertexID;
+typedef MyGraph::edge_descriptor   EdgeID;
 
 class MyVisitor : public boost::default_dfs_visitor
 {
@@ -22,21 +29,19 @@ public:
 int main()
 {
 	MyGraph g;
-	boost::add_edge(0, 1, g);
-	boost::add_edge(0, 2, g);
-	boost::add_edge(1, 2, g);
-	boost::add_edge(1, 3, g);
-	MyVisitor vis;
-	MyGraph::adjacency_iterator neighbourIt, neighbourEnd;
-	boost::tie(neighbourIt, neighbourEnd) = boost::adjacent_vertices(1, g);
-	for (; neighbourIt != neighbourEnd; ++neighbourIt){
-		auto vertexID = *neighbourIt; // dereference vertexIt, get the ID
-		MyVertex & vertex = g[vertexID];
-		std::cout << vertexID << std::endl;
+	std::vector<VertexID> ids;
+	for (int i = 0; i < 4; i++)
+	{
+		VertexID vID = boost::add_vertex(g);
+		ids.push_back(vID);
+		g[vID].setName("name" + i);
 	}
-	std::string s;
-	std::cin >> s;
-	return 0;
+	EdgeID edge;
+	bool ok;
+	boost::tie(edge, ok) = boost::add_edge(ids[0], ids[1], g); 
+	boost::tie(edge, ok) = boost::add_edge(ids[1], ids[3], g);
+	boost::tie(edge, ok) = boost::add_edge(ids[2], ids[3], g);
+	boost::tie(edge, ok) = boost::add_edge(ids[3], ids[0], g);
 }
 /*
 int main()

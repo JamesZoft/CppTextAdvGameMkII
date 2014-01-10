@@ -4,11 +4,11 @@
 
 class PositionComponent : public artemis::Component
 {
-	public:
-		int* uniqueRoomId;
-		PositionComponent(int* uniqueRoomId)
-		{
-			this->uniqueRoomId = uniqueRoomId;
-		};
+
+private:
+	const int uniqueRoomId;
+public:
+	PositionComponent(int _uniqueRoomId) : uniqueRoomId(_uniqueRoomId)
+	{};
 };
 

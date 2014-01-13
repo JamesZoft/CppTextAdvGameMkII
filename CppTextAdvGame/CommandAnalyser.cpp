@@ -2,6 +2,11 @@
 #include <string>
 #include "InputCallback.h"
 #include <vector>
+#include "MovementSystem.h"
+#include <functional>
+#include "Artemis\Entity.h"
+#include "PositionComponent.h"
+#include "Artemis\ComponentType.h"
 
 const enum Commands { attack = 0, move, pickup, look };
 const std::vector<std::string> strCommands {"attack", "move", "pickup", "look"};
@@ -10,7 +15,7 @@ CommandAnalyser::CommandAnalyser()
 {
 }
 
-bool CommandAnalyser::analyse(std::string command, InputCallback *callback)
+std::function<bool (artemis::Entity&)> CommandAnalyser::analyse(std::string command)
 {
 	if (command == "attack")
 	{
@@ -18,9 +23,10 @@ bool CommandAnalyser::analyse(std::string command, InputCallback *callback)
 	}
 	if (command == "move")
 	{
-
+		PositionComponent nextPos;
+		return [=, &ms](artemis::Entity& e) { return ms.moveEntity(e, nextPos); };
 	}
-	return true;
+	return nullptr;
 }
 
 CommandAnalyser::~CommandAnalyser()

@@ -8,6 +8,7 @@
 #include "boost/graph/astar_search.hpp"
 #include "Room.h"
 #include <vector>
+#include "cpp-utils-master\stringutils.hpp"
 
 struct Edge {};
 typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, Room, Edge> MyGraph;
@@ -34,7 +35,9 @@ int main()
 	{
 		VertexID vID = boost::add_vertex(g);
 		ids.push_back(vID);
-		g[vID].setName("name" + i);
+		std::stringstream ss;
+		ss << "name" << i;
+		g[vID].setName(ss.str());
 	}
 	EdgeID edge;
 	bool ok;
@@ -42,6 +45,28 @@ int main()
 	boost::tie(edge, ok) = boost::add_edge(ids[1], ids[3], g);
 	boost::tie(edge, ok) = boost::add_edge(ids[2], ids[3], g);
 	boost::tie(edge, ok) = boost::add_edge(ids[3], ids[0], g);
+
+	MyGraph::vertex_iterator vertexIt, vertexEnd;
+	boost::tie(vertexIt, vertexEnd) = boost::vertices(g);
+	VertexID vertexID;
+	for (; vertexIt != vertexEnd; ++vertexIt){
+		vertexID = *vertexIt; // dereference vertexIt, get the ID
+		Room & vertex = g[vertexID];
+		if (vertex.getName() == std::string("name0")){
+			break; 
+		} // Gotcha
+	}
+
+	std::vector<Room*> rooms;
+
+	MyGraph::adjacency_iterator neighbourIt, neighbourEnd;
+	boost::tie(neighbourIt, neighbourEnd) = boost::adjacent_vertices(vertexID, g);
+	for (; neighbourIt != neighbourEnd; ++neighbourIt){
+		VertexID vertexID = *neighbourIt; // dereference vertexIt, get the ID
+		Room & vertex = g[vertexID];
+		rooms.push_back(&vertex);
+	}
+	std::cout << "asd" << std::endl;
 }
 /*
 int main()

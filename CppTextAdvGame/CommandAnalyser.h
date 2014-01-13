@@ -1,12 +1,13 @@
 #pragma once
 #include <string>
 #include "InputCallback.h"
+#include "Artemis\Entity.h"
 
 class CommandAnalyser
 {
 public:
 	CommandAnalyser();
-	bool analyse(std::string command, InputCallback *callback);
+	std::function<bool(artemis::Entity&)> analyse(std::string command);
 	~CommandAnalyser();
 private:
 	std::string* stringCommands;

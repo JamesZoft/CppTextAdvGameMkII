@@ -7,6 +7,7 @@ private:
 public:
 	Room();
 	void setName(std::string);
+	std::string getName();
 	~Room();
 };
 

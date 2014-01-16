@@ -5,6 +5,5 @@ public:
 	Game();
 	void play();
 	~Game();
-	static MovementSystem ms;
 };
 

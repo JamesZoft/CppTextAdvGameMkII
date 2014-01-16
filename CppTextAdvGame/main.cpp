@@ -29,6 +29,12 @@ public:
 
 int main()
 {
+	Game* game = new Game();
+	game->play();
+}
+/*
+int main()
+{
 	MyGraph g;
 	std::vector<VertexID> ids;
 	for (int i = 0; i < 4; i++)
@@ -68,7 +74,7 @@ int main()
 	}
 	std::cout << "asd" << std::endl;
 }
-/*
+
 int main()
 {
 	//Game* game = new Game();

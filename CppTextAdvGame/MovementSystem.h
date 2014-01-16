@@ -17,12 +17,15 @@ class MovementSystem : public artemis::EntityProcessingSystem
 		artemis::ComponentMapper<PositionComponent> currPosMapper;
 		artemis::ComponentMapper<PositionComponent> nextPosMapper;
 		
-		bool pointsAreAdjacent(PositionComponent, PositionComponent);
+		bool pointsAreAdjacent(PositionComponent*, PositionComponent*);
 		MyGraph roomGraph;
+		std::vector<Room*> rooms;
 	public:
 		MovementSystem();
-		std::vector<PositionComponent*> getAdjacentPositions(int id);
-		bool moveEntity(artemis::Entity &e, const PositionComponent &nextPos);
+		std::vector<PositionComponent*> getAdjacentPositions(PositionComponent*);
+		bool moveEntity(artemis::Entity &e, PositionComponent* nextPos);
+		PositionComponent* getPositionComponentWithId(const int id);
+		std::vector<Room*> getRoomList();
 		virtual void initialize() {
 			currPosMapper.init(*world);
 			nextPosMapper.init(*world);

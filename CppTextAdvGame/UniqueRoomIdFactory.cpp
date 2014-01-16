@@ -1,5 +1,6 @@
 #include "UniqueRoomIdFactory.h"
 
+int UniqueRoomIdFactory::currMaxId;
 
 UniqueRoomIdFactory::UniqueRoomIdFactory()
 {

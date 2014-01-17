@@ -42,11 +42,11 @@ void Game::play()
 		movementSys->process();
 		std::string input;
 		cin >> input;
-		std::function<bool (artemis::Entity &)> returnFunc = analyser->analyse(input, world, player);
+		std::function<bool (artemis::Entity*)> returnFunc = analyser->analyse(input, world, &player);
 		if (returnFunc == nullptr)
 			playing = false;
 		else
-			returnFunc(player);
+			returnFunc(&player);
         Sleep(160);
 	}
 }

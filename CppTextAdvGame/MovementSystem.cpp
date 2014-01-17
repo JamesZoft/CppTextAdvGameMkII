@@ -33,18 +33,18 @@ MovementSystem::MovementSystem()
 	boost::tie(edge, ok) = boost::add_edge(ids[3], ids[0], roomGraph);
 }
 
-void MovementSystem::processEntity(artemis::Entity &e)
+void MovementSystem::processEntity(artemis::Entity* e)
 {
-	PositionComponent* nextPos = nextPosMapper.get(e);
+	PositionComponent* nextPos = nextPosMapper.get(*e);
 	moveEntity(e, nextPos);
 }
 
-bool MovementSystem::moveEntity(artemis::Entity &e, PositionComponent* nextPos)
+bool MovementSystem::moveEntity(artemis::Entity* e, PositionComponent* nextPos)
 {
-	if (pointsAreAdjacent(e.getComponent<PositionComponent>(), nextPos))
+	if (pointsAreAdjacent(e->getComponent<PositionComponent>(), nextPos))
 	{
-		e.removeComponent<PositionComponent>();
-		e.addComponent(nextPos);
+		e->removeComponent<PositionComponent>();
+		e->addComponent(nextPos);
 	}
 	return false;
 }

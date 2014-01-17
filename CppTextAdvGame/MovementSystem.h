@@ -23,7 +23,7 @@ class MovementSystem : public artemis::EntityProcessingSystem
 	public:
 		MovementSystem();
 		std::vector<PositionComponent*> getAdjacentPositions(PositionComponent*);
-		bool moveEntity(artemis::Entity &e, PositionComponent* nextPos);
+		bool moveEntity(artemis::Entity* e, PositionComponent* nextPos);
 		PositionComponent* getPositionComponentWithId(const int id);
 		std::vector<Room*> getRoomList();
 		virtual void initialize() {
@@ -31,6 +31,6 @@ class MovementSystem : public artemis::EntityProcessingSystem
 			nextPosMapper.init(*world);
 		};
 		
-		void processEntity(artemis::Entity &e);
+		void processEntity(artemis::Entity* e);
 };
 

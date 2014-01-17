@@ -23,7 +23,7 @@ void blah(artemis::SystemManager* sm)
 	sm->getSystem<MovementSystem>();
 }
 
-std::function<bool(artemis::Entity&)> CommandAnalyser::analyse(std::string command, artemis::World world, artemis::Entity &player)
+std::function<bool(artemis::Entity*)> CommandAnalyser::analyse(std::string command, artemis::World world, artemis::Entity* player)
 {
 	if (command.find("attack"))
 	{
@@ -36,7 +36,7 @@ std::function<bool(artemis::Entity&)> CommandAnalyser::analyse(std::string comma
 		{
 			std::string fullCommand("move ");
 			std::cout << "Move where? Your options are:" << std::endl;
-			listAvailablePositions(sm, player);
+			listAvailablePositions(sm, *player);
 			std::string id;
 			std::cin >> id;
 			fullCommand += id;
@@ -47,7 +47,7 @@ std::function<bool(artemis::Entity&)> CommandAnalyser::analyse(std::string comma
 			MovementSystem* ms = sm->getSystem<MovementSystem>();
 			std::string inputMoveLocation = util::string::split(command, " ")[1];
 			PositionComponent* nextPos = ms->getPositionComponentWithId(util::string::to<int>(inputMoveLocation));
-			return [=](artemis::Entity& e) { return ms->moveEntity(e, nextPos); };
+			return [=](artemis::Entity* e) { return ms->moveEntity(e, nextPos); };
 		}
 	}
 	else

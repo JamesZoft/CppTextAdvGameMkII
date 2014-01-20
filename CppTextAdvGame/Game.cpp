@@ -8,6 +8,7 @@
 #include "MovementSystem.h"
 #include "Artemis\SystemManager.h"
 #include "Artemis\Entity.h"
+#include "EntityFactory.h"
 #include <windows.h>
 
 Game::Game()
@@ -31,22 +32,23 @@ void Game::play()
 	artemis::EntityManager * em = world.getEntityManager();
 	sm->initializeAll();
 
-	artemis::Entity &player = em->create();
+	EntityFactory* ef = new EntityFactory(*em);
+	artemis::Entity *player = ef->createPlayer();
 
-	player.refresh();
+	player->refresh();
 
-	player.addComponent(movementSys->getPositionComponentWithId(0));
+	player->addComponent(movementSys->getPositionComponentWithId(0));
 	while (playing)
 	{
 		world.loopStart();
 		movementSys->process();
 		std::string input;
 		cin >> input;
-		std::function<bool (artemis::Entity*)> returnFunc = analyser->analyse(input, world, &player);
+		std::function<bool (artemis::Entity*)> returnFunc = analyser->analyse(input, world, *player);
 		if (returnFunc == nullptr)
 			playing = false;
 		else
-			returnFunc(&player);
+			returnFunc(player);
         Sleep(160);
 	}
 }

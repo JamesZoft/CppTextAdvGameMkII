@@ -22,15 +22,17 @@ class MovementSystem : public artemis::EntityProcessingSystem
 		std::vector<Room*> rooms;
 	public:
 		MovementSystem();
+		void processEntity(artemis::Entity &e);
+		void processEntities(artemis::ImmutableBag<artemis::Entity*> & bag);
+		bool checkProcessing();
 		std::vector<PositionComponent*> getAdjacentPositions(PositionComponent*);
 		bool moveEntity(artemis::Entity* e, PositionComponent* nextPos);
 		PositionComponent* getPositionComponentWithId(const int id);
 		std::vector<Room*> getRoomList();
-		virtual void initialize() {
+		void initialize() {
 			currPosMapper.init(*world);
 			nextPosMapper.init(*world);
 		};
 		
-		void processEntity(artemis::Entity* e);
 };
 

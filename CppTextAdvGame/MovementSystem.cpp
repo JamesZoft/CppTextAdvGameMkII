@@ -33,10 +33,21 @@ MovementSystem::MovementSystem()
 	boost::tie(edge, ok) = boost::add_edge(ids[3], ids[0], roomGraph);
 }
 
-void MovementSystem::processEntity(artemis::Entity* e)
+
+void MovementSystem::processEntity(artemis::Entity& e)
 {
-	PositionComponent* nextPos = nextPosMapper.get(*e);
-	moveEntity(e, nextPos);
+	PositionComponent* nextPos = nextPosMapper.get(e);
+	moveEntity(&e, nextPos);
+}
+
+void MovementSystem::processEntities(artemis::ImmutableBag<artemis::Entity*> & bag)
+{
+
+}
+
+bool MovementSystem::checkProcessing()
+{
+	return true;
 }
 
 bool MovementSystem::moveEntity(artemis::Entity* e, PositionComponent* nextPos)

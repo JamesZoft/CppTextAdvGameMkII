@@ -23,7 +23,7 @@ void blah(artemis::SystemManager* sm)
 	sm->getSystem<MovementSystem>();
 }
 
-std::function<bool(artemis::Entity*)> CommandAnalyser::analyse(std::string command, artemis::World world, artemis::Entity& player)
+void CommandAnalyser::analyse(std::string command)
 {
 	if (command.find("attack"))
 	{
@@ -31,7 +31,6 @@ std::function<bool(artemis::Entity*)> CommandAnalyser::analyse(std::string comma
 	}
 	if (command.find("move") != command.npos)
 	{
-		artemis::SystemManager* sm = world.getSystemManager();
 		if (command == "move")
 		{
 			std::string fullCommand("move ");
@@ -40,31 +39,23 @@ std::function<bool(artemis::Entity*)> CommandAnalyser::analyse(std::string comma
 			std::string id;
 			std::cin >> id;
 			fullCommand += id;
-			return analyse(fullCommand, world, player);
+			return analyse(fullCommand);
 		}
-		else
-		{
-			MovementSystem* ms = sm->getSystem<MovementSystem>();
-			std::string inputMoveLocation = util::string::split(command, " ")[1];
-			PositionComponent* nextPos = ms->getPositionComponentWithId(util::string::to<int>(inputMoveLocation));
-			return [=](artemis::Entity* e) { return ms->moveEntity(e, nextPos); };
-		}
+		//else
+		//{
+		//	MovementSystem* ms = sm->getSystem<MovementSystem>();
+		//	std::string inputMoveLocation = util::string::split(command, " ")[1];
+		//	PositionComponent* nextPos = ms->getPositionComponentWithId(util::string::to<int>(inputMoveLocation));
+		//	return [=](artemis::Entity* e) { return ms->moveEntity(e, nextPos); };
+		//}
 	}
 	else
 	{
 
 	}
-	return nullptr;
 }
 
-void CommandAnalyser::listAvailablePositions(artemis::SystemManager* sm, artemis::Entity &player)
-{
-	auto adjPositions = ((MovementSystem*)sm->getSystem<MovementSystem>())->getAdjacentPositions(player.getComponent<PositionComponent>());
-	for (auto pc : adjPositions)
-	{
-		Console::write("- " + util::string::from<int>(pc->getUniqueRoomId()));
-	}
-}
+
 
 CommandAnalyser::~CommandAnalyser()
 {

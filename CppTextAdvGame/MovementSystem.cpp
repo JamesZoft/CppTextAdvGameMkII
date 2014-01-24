@@ -2,10 +2,13 @@
 #include "Artemis\Entity.h"
 #include "Artemis\ComponentType.h"
 
+#include "Console.h"
 #include <iostream>
 #include <utility>
+#include "cpp-utils-master\stringutils.hpp"
 #include <algorithm>
 #include <vector>
+#include "Message.h"
 
 #include "boost/graph/adjacency_list.hpp"
 #include "boost/graph/depth_first_search.hpp"
@@ -36,13 +39,37 @@ MovementSystem::MovementSystem()
 
 void MovementSystem::processEntity(artemis::Entity& e)
 {
-	PositionComponent* nextPos = nextPosMapper.get(e);
-	moveEntity(&e, nextPos);
+	std::string input = inputMapper.get(e)->getInput();
+
+	if (inputMapper.get(e) != nullptr)
+	{
+		PositionComponent* nextPos = getPositionComponentWithId(inputMapper.get(e)->getInput());
+		moveEntity(&e, nextPos);
+	}
+	else //The entity is not moveable via input
+	{
+		//Get the position that the AI computation has decided the NPC will be if/when npc movement is implemented
+	}
+	
+}
+
+Message* MovementSystem::listAvailablePositions(artemis::Entity &player)
+{
+	auto adjPositions = getAdjacentPositions(player.getComponent<PositionComponent>());
+	Message* m = new Message();
+	for (auto pc : adjPositions)
+	{
+		m->message += "- " + util::string::from<int>(pc->getUniqueRoomId()) + "\n";
+	}
+	return m;
 }
 
 void MovementSystem::processEntities(artemis::ImmutableBag<artemis::Entity*> & bag)
 {
-
+	for (int i = 0; i < bag.getCount; i++)
+	{
+		processEntity(*bag.get(i));
+	}
 }
 
 bool MovementSystem::checkProcessing()

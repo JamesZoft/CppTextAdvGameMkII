@@ -9,7 +9,7 @@ class CommandAnalyser
 {
 public:
 	CommandAnalyser();
-	std::function<bool(artemis::Entity*)> analyse(std::string, artemis::World, artemis::Entity& player);
+	void analyse(std::string);
 	void listAvailablePositions(artemis::SystemManager*, artemis::Entity &player);
 	~CommandAnalyser();
 private:
